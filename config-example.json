@@ -5,5 +5,9 @@
 	"client_id": "bot-id",
 	"test_guild_id": "dev-server-id",
 	"verification_phrase": "test",
-	"verify_role": "Verified"
+	"verify_role": "Verified",
+	"status": {
+		"ACTIVITY": "over The Fortress",
+		"TYPE": "WATCHING"
+	}
 }
