@@ -8,7 +8,7 @@
 
 // Deconstructed the constants we need in this file.
 
-const { MessageEmbed, Collection } = require("discord.js");
+const { MessageEmbed, Collection, MessageActionRow, MessageSelectMenu } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
@@ -32,7 +32,6 @@ module.exports = {
          * @description Response embed
          */
         const resEmbed = new MessageEmbed()
-            .setColor(0x4286f4)
 
         resEmbed
             .setTitle("Pong!")

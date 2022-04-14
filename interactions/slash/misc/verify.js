@@ -51,7 +51,6 @@ module.exports = {
          * @description Response embed
          */
         const resEmbed = new MessageEmbed()
-            .setColor(0x4286f4)
 
         if (phrase) {
             phrase = phrase.toLowerCase();

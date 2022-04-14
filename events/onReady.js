@@ -4,6 +4,8 @@
  * @since 1.0.0
  */
 
+const config = require("../config.json");
+
 module.exports = {
 	name: "ready",
 	once: true,
@@ -15,5 +17,7 @@ module.exports = {
 	execute(client) {
 		console.clear();
 		console.log(`Ready! Logged in as ${client.user.tag}`);
+
+		client.user.setActivity(config.status.ACTIVITY, { type: config.status.TYPE });
 	},
 };
