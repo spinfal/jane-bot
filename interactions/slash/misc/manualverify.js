@@ -15,14 +15,14 @@ const config = require("../../../config.json");
 module.exports = {
     // The data needed to register slash commands to Discord.
     data: new SlashCommandBuilder()
-        .setName("verify")
+        .setName("manualverify")
         .setDescription(
-            "Veriy yourself and get access to the rest of the server."
+            "Manually verify a user."
         )
-        .addStringOption((option) =>
+        .addUserOption((option) =>
             option
-                .setName("phrase")
-                .setDescription("The verification phrase.")
+                .setName("user")
+                .setDescription("The user to manually verify.")
                 .setRequired(true)
         ),
 
@@ -34,25 +34,14 @@ module.exports = {
      */
 
     async execute(interaction) {
-        console.log(interaction.channel.id)
-        if (interaction.channel.id !== config.verification.channel_id) {
-            return interaction.reply({
-                content: "This command can only be used in the verification channel.",
-                ephemeral: true
-            })
-        }
-
-        /**
-         * @type {String}
-         * @description The current verification phrase
-         */
-        const verifyPhrase = config.verification.phrase;
+        if (!await require("../../checks/checkPerms.js").execute(interaction, "MANAGE_CHANNELS")) return;
 
         /**
          * @type {string}
          * @description The "phrase" argument
          */
-        const phrase = interaction.options.getString("phrase").toLowerCase();
+        let user = interaction.options.getUser("user");
+        user = interaction.member.guild.members.cache.get(user.id);
 
         /**
          * @type {MessageEmbed}
@@ -60,36 +49,35 @@ module.exports = {
          */
         const resEmbed = new MessageEmbed()
 
-        if (phrase) {
-            resEmbed.setTitle("Verification Status");
+        if (user) {
+            resEmbed.setTitle("Manual Verification Status");
 
-            if (phrase === verifyPhrase) {
+            if (!user.roles.cache.has(config.verification.role_id)) {
                 resEmbed
                     .setDescription(
-                        "You have been successfully verified. You may now access the rest of the server."
+                        `<@${user.user.id}> has been manually verified by <@${interaction.member.id}>.`
                     )
                     .setColor("GREEN");
 
                 // Add the verified role to the user
                 const role = interaction.guild.roles.cache.find(role => role.name === config.verification.role);
-                interaction.member.roles.add(role);
+                user.roles.add(role);
             } else {
                 resEmbed
-                    .setDescription(`You provided an incorrect verification phrase! The phrase you provided was: \`${phrase}\``)
+                    .setDescription("That user is already verified.")
                     .setColor("RED");
             };
         } else {
             resEmbed
                 .setDescription(
-                    "You need to provide the verification phrase to get access to the rest of the server."
+                    "You need to provide a user that you wish to verify."
                 )
                 .setColor("RED");
         };
 
         // Replies to the interaction!
         await interaction.reply({
-            embeds: [resEmbed],
-            ephemeral: true
+            embeds: [resEmbed]
         });
     },
 };

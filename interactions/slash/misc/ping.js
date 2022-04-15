@@ -34,7 +34,7 @@ module.exports = {
         const resEmbed = new MessageEmbed()
 
         resEmbed
-            .setTitle("Pong!")
+            .setTitle("Pong! 📡")
             .setDescription(
                 `Latency is ${Date.now() - interaction.createdTimestamp}ms.`
             )

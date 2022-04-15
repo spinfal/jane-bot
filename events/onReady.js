@@ -19,5 +19,8 @@ module.exports = {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 
 		client.user.setActivity(config.status.ACTIVITY, { type: config.status.TYPE });
+		/* un-comment to remove all global slash commands
+		client.application.commands.set([]);
+		*/
 	},
 };

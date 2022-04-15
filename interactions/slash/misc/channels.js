@@ -27,6 +27,8 @@ module.exports = {
      */
 
     async execute(interaction) {
+        if (!await require("../../checks/checkPerms.js").execute(interaction, "MANAGE_CHANNELS")) return;
+
         /**
          * @type {MessageEmbed}
          * @description Response embed
