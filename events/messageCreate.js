@@ -7,7 +7,7 @@
 // Declares constants (destructured) to be used in this file.
 
 const { Collection } = require("discord.js");
-const { prefix, owner } = require("../config.json");
+const config = require("../config.json");
 
 // Prefix regex, we will use to match in mention prefix.
 
@@ -32,6 +32,10 @@ module.exports = {
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
 		// You can change the behavior as per your liking at ./messages/onMention.js
 
+		if (message.channel.id == config.verification.channel_id) {
+			message.delete();
+		}
+
 		if (
 			message.content == `<@${client.user.id}>` ||
 			message.content == `<@!${client.user.id}>`
@@ -45,7 +49,7 @@ module.exports = {
 		 * @type {String}
 		 */
 
-		const checkPrefix = prefix.toLowerCase();
+		const checkPrefix = config.prefix.toLowerCase();
 
 		/**
 		 * @description Regex expression for mention prefix
@@ -101,7 +105,7 @@ module.exports = {
 
 		// Owner Only Property, add in your command properties if true.
 
-		if (command.ownerOnly && message.author.id !== owner) {
+		if (command.ownerOnly && message.author.id !== config.owner) {
 			return message.reply({ content: "This is a owner only command!" });
 		}
 

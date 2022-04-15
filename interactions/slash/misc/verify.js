@@ -34,7 +34,6 @@ module.exports = {
      */
 
     async execute(interaction) {
-        console.log(interaction.channel.id)
         if (interaction.channel.id !== config.verification.channel_id) {
             return interaction.reply({
                 content: "This command can only be used in the verification channel.",
