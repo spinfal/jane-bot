@@ -4,8 +4,12 @@
 	"owner": "owner-id",
 	"client_id": "bot-id",
 	"test_guild_id": "dev-server-id",
-	"verification_phrase": "test",
-	"verify_role": "Verified",
+	"verification": {
+		"phrase": "test",
+		"role": "Human",
+		"role_id": "953781177624449024",
+		"channel_id": "964017271787884614"
+	},
 	"status": {
 		"ACTIVITY": "over The Fortress",
 		"TYPE": "WATCHING"

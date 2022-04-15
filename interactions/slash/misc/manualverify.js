@@ -34,7 +34,7 @@ module.exports = {
      */
 
     async execute(interaction) {
-        if (!await require("../../checks/checkPerms.js").execute(interaction, "MANAGE_CHANNELS")) return;
+        if (!await require("../../checks/checkPerms.js").execute(interaction, "MANAGE_MESSAGES")) return;
 
         /**
          * @type {string}
