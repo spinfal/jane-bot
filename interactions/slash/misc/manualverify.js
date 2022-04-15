@@ -38,7 +38,7 @@ module.exports = {
 
         /**
          * @type {string}
-         * @description The "phrase" argument
+         * @description The "user" argument
          */
         let user = interaction.options.getUser("user");
         user = interaction.member.guild.members.cache.get(user.id);
