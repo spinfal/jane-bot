@@ -45,7 +45,7 @@ module.exports = {
          * @type {String}
          * @description The current verification phrase
          */
-        const verifyPhrase = config.verification.phrase;
+        const verifyPhrase = config.verification.phrase.toLowerCase();
 
         /**
          * @type {string}
